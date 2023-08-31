@@ -25,15 +25,18 @@ class FirstFragment : Fragment() {
 
         return root
     }
-
+    private var counter = 1
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.actionButton.setOnClickListener {
-            val insertedNumber: Int? = binding.first.text.toString().toIntOrNull()
-            if (insertedNumber != null) {
-                lifecycleScope.launch{
+            val inputText = binding.first.text.toString()
+            if (inputText != null) {
+                val number = inputText.toInt()
+                lifecycleScope.launch {
                     delay(2000)
-                    binding.second.text = (insertedNumber + 1).toString()
+                    binding.second.text = (number + counter).toString()
+                    counter++
                 }
             }
         }
